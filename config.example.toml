@@ -1,0 +1,7 @@
+title = "everydayToggl"
+
+[toggl]
+base_api_url = "https://www.toggl.com/api/v8/"
+project_id = "999999"
+toggl_api_key = "xxxxxxx888887s0990088097666"
+timesheet_log_directory = "/home/eedeep/.irssi/logs/mytimesheets"

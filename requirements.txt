@@ -1,0 +1,4 @@
+requests==2.6.0
+arrow==0.5.4
+beautifulsoup==3.2.1
+toml-python==0.4.1
