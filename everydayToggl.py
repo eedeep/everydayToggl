@@ -83,8 +83,10 @@ def togglify_time_entries_from_yesterday():
         month = '0{0}'.format(yesterday.month)
     else:
         month = yesterday.month
+
     filename = 'mytimesheets_{year}_{month}_{day}.log'.format(year=yesterday.year, month=month, day=yesterday.day)
     filepath = os.path.join(TIMESHEET_LOG_DIRECTORY, filename)
+
     time_entries = parse_time_entries_in_file(filepath)
     for entry in time_entries:
         create_new_entry(yesterday, entry['start'], entry['end'], entry['description'])
