@@ -31,8 +31,8 @@ with open(config_file_path) as config_file:
 TIMESHEET_LOG_DIRECTORY = config['toggl']['timesheet_log_directory']
 
 def create_new_entry(day, start_time, end_time, description):
-    start_datetime = datetime.strptime(start_time.strip(), "%H:%M")
-    end_datetime = datetime.strptime(end_time.strip(), "%H:%M")
+    start_datetime = datetime.strptime(start_time.strip(), "%H%M")
+    end_datetime = datetime.strptime(end_time.strip(), "%H%M")
     tz_aware_start = arrow.get(datetime(day.year, day.month, day.day, start_datetime.hour, start_datetime.minute), 'Australia/Melbourne')
     tz_aware_end = arrow.get(datetime(day.year, day.month, day.day, end_datetime.hour, end_datetime.minute), 'Australia/Melbourne')
 
@@ -58,7 +58,7 @@ def parse_time_entries_in_file(file_path):
         for line in lines:
             matches = re.match('(?P<log_cruft>.*?> )s:(?P<start>.*? )e:(?P<end>.*? )(?P<description>.*)$', line)
             if matches:
-                try:    
+                try:
                     found_attributes = matches.groupdict()
                     for required_attribute in ['start', 'end', 'description']:
                         if not found_attributes.has_key(required_attribute):
@@ -75,7 +75,7 @@ def parse_time_entries_in_file(file_path):
 
     return entries
 
-    
+
 def togglify_time_entries_from_yesterday():
     yesterday =  datetime.today() - timedelta(days=1)
     # dirty hack to pad the month
@@ -90,5 +90,5 @@ def togglify_time_entries_from_yesterday():
     time_entries = parse_time_entries_in_file(filepath)
     for entry in time_entries:
         create_new_entry(yesterday, entry['start'], entry['end'], entry['description'])
-        
+
 togglify_time_entries_from_yesterday()
