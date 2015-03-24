@@ -79,10 +79,7 @@ def parse_time_entries_in_file(file_path):
 def togglify_time_entries_from_yesterday():
     yesterday =  datetime.today() - timedelta(days=1)
     # dirty hack to pad the month
-    if yesterday.month < 10:
-        month = '0{0}'.format(yesterday.month)
-    else:
-        month = yesterday.month
+    yesterday = str(yesterday.month).rjust(2, '0')
 
     filename = 'mytimesheets_{year}_{month}_{day}.log'.format(year=yesterday.year, month=month, day=yesterday.day)
     filepath = os.path.join(TIMESHEET_LOG_DIRECTORY, filename)
