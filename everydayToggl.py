@@ -31,8 +31,8 @@ with open(config_file_path) as config_file:
 TIMESHEET_LOG_DIRECTORY = config['toggl']['timesheet_log_directory']
 
 def create_new_entry(day, start_time, end_time, description):
-    start_datetime = datetime.strptime(start_time.strip(), "%H%M")
-    end_datetime = datetime.strptime(end_time.strip(), "%H%M")
+    start_datetime = datetime.strptime(start_time.strip().replace(':', ''), "%H%M")
+    end_datetime = datetime.strptime(end_time.strip().replace(':', ''), "%H%M")
     tz_aware_start = arrow.get(datetime(day.year, day.month, day.day, start_datetime.hour, start_datetime.minute), 'Australia/Melbourne')
     tz_aware_end = arrow.get(datetime(day.year, day.month, day.day, end_datetime.hour, end_datetime.minute), 'Australia/Melbourne')
 
